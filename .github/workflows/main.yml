@@ -171,5 +171,8 @@ jobs:
       run: |
         cmake --build "build/ci" --config ${{ env.CMAKE_BUILD_TYPE }} --target StreamFX
 
-    - name: Get file tree
-      run: tree /f
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: "StreamFX_${{ matrix.name }}_${{ matrix.compiler }}"
+        path: build/ci
