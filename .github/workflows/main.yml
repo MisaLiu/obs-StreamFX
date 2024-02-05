@@ -171,8 +171,18 @@ jobs:
       run: |
         cmake --build "build/ci" --config ${{ env.CMAKE_BUILD_TYPE }} --target StreamFX
 
-    - name: Upload artifact
+    - name: "Upload artifact: Debug"
       uses: actions/upload-artifact@v4
       with:
-        name: "StreamFX_${{ matrix.name }}_${{ matrix.compiler }}"
-        path: ${{ github.workspace }}/build/ci
+        name: "StreamFX_${{ matrix.name }}_${{ matrix.compiler }}_Debug"
+        path: |
+          ${{ github.workspace }}/build/ci/Debug/StreamFX.dll
+          ${{ github.workspace }}/build/ci/Debug/*.pdb
+    
+    - name: "Upload artifact: Release"
+      uses: actions/upload-artifact@v4
+      with:
+        name: "StreamFX_${{ matrix.name }}_${{ matrix.compiler }}_Release"
+        path: |
+          ${{ github.workspace }}/build/ci/RelWithDebInfo/StreamFX.dll
+          ${{ github.workspace }}/build/ci/RelWithDebInfo/*.pdb
